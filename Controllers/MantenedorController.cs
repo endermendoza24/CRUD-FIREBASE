@@ -21,8 +21,8 @@ namespace BDFIREBASE.Controllers
         {
             IFirebaseConfig config = new FirebaseConfig
             {
-                AuthSecret = "gAMb4Pbfku1AwMdAFsObBJt1OOJHIDhW4zA497vd",
-                BasePath = "https://bdfirebase-4f03f-default-rtdb.firebaseio.com/"
+                AuthSecret = "ipZrqSpELBuhttG1wDNzbm6UohXfcszyS3EG6MwS",
+                BasePath = "https://appcompras-2752e-default-rtdb.firebaseio.com/"
             };
 
             cliente = new FirebaseClient(config); //  con esto ya estaría conectado a firebase 
@@ -31,7 +31,7 @@ namespace BDFIREBASE.Controllers
         public ActionResult Inicio()
         {
             Dictionary<string, Contacto> lista = new Dictionary<string, Contacto>();
-            FirebaseResponse response = cliente.Get("contactos");
+            FirebaseResponse response = cliente.Get("Productos");
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 lista = JsonConvert.DeserializeObject<Dictionary<string, Contacto>>(response.Body);
 
@@ -42,11 +42,12 @@ namespace BDFIREBASE.Controllers
             {
                 listaContacto.Add(new Contacto()
                 {
-                    IdContacto = elemento.Key,
-                    Nombre = elemento.Value.Nombre,
-                    Correo = elemento.Value.Correo,
-                    Telefono = elemento.Value.Telefono
-                });
+                    IdContacto = elemento.Key,                   
+                    Descripcion = elemento.Value.Descripcion,
+                    Icono = elemento.Value.Icono,
+                    Marca = elemento.Value.Marca,
+                    Precio = elemento.Value.Precio
+                }) ;
             }
 
             return View(listaContacto);
@@ -58,7 +59,7 @@ namespace BDFIREBASE.Controllers
 
         public ActionResult Editar(string idcontacto)
         {
-            FirebaseResponse response = cliente.Get("contactos");
+            FirebaseResponse response = cliente.Get("Productos");
 
             Contacto ocontacto = response.ResultAs<Contacto>();
 
@@ -72,7 +73,7 @@ namespace BDFIREBASE.Controllers
 
         public ActionResult Eliminar(string idcontacto)
         {
-            FirebaseResponse response = cliente.Delete("contactos/" + idcontacto);
+            FirebaseResponse response = cliente.Delete("Productos/" + idcontacto);
             return RedirectToAction("Inicio", "Mantenedor");
         }
 
@@ -81,7 +82,7 @@ namespace BDFIREBASE.Controllers
         {
             string IdGenerado = Guid.NewGuid().ToString("N");
 
-            SetResponse response = cliente.Set("contactos/" + IdGenerado, oContacto);
+            SetResponse response = cliente.Set("Productos/" + IdGenerado, oContacto);
 
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
@@ -99,7 +100,7 @@ namespace BDFIREBASE.Controllers
             string idcontacto = oContacto.IdContacto;
             oContacto.IdContacto = null;
 
-            FirebaseResponse response = cliente.Update("contactos/"+idcontacto, oContacto);
+            FirebaseResponse response = cliente.Update("Productos/"+idcontacto, oContacto);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {

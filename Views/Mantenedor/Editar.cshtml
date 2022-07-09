@@ -9,25 +9,29 @@
 <br />
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h4>Editar contacto</h4>
+        <h4>Editar producto</h4>
     </div>
 
     <div class="panel-body">
         <form action="@Url.Action("Editar", "Mantenedor")" method="post">
             <input type="hidden" name="IdContacto" value="@Html.DisplayTextFor(m=>m.IdContacto)" />
             <div class="form-group">
-                <label>Nombre</label>
-                <input class="form-control" type="text" name="Nombre" value="@Html.DisplayTextFor(m=>m.Nombre)" />
+                <label>Descripción</label>
+                <input class="form-control" type="text" name="Descripcion" value="@Html.DisplayTextFor(m=>m.Descripcion)" />
             </div>
 
             <div class="form-group">
-                <label>Correo</label>
-                <input class="form-control" type="email" name="Correo" value="@Html.DisplayTextFor(m=>m.Correo)" />
+                <label>Marca</label>
+                <input class="form-control" type="text" name="Marca" value="@Html.DisplayTextFor(m=>m.Marca)" />
+            </div>
+            <div class="form-group">
+                <label>Ícono</label>
+                <input class="form-control" type="text" name="Icono" value="@Html.DisplayTextFor(m=>m.Icono)" />
             </div>
 
             <div class="form-group">
-                <label>Teléfono</label>
-                <input class="form-control" type="tel" name="Telefono" value="@Html.DisplayTextFor(m=>m.Telefono)" />
+                <label>Precio</label>
+                <input class="form-control" type="text" name="Precio" value="@Html.DisplayTextFor(m=>m.Precio)" />
             </div>
 
             <hr />
