@@ -7,7 +7,7 @@ namespace BDFIREBASE.Models
 {
     public class Contacto
     {
-        public int IdContacto { get; set; }
+        public string IdContacto { get; set; }
         public string Nombre { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }

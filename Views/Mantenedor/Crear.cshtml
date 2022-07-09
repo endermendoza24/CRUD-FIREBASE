@@ -4,12 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<br />
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4>Crear contacto</h4>
     </div>
-
-    <br />
 
     <div class="panel-body">
         <form action="@Url.Action("Crear", "Mantenedor")" method="post">
@@ -30,7 +29,7 @@
 
             <hr />
             <button type="submit" class="btn btn-primary">Registrar</button>
-
+            <button class="btn btn-danger" href="@Url.Action("Inicio", "Mantenedor")">Volver</button>
             <a></a>
 
         </form>

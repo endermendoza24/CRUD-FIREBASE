@@ -20,7 +20,7 @@
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
-                    <th></th>
+                    <th style="width:150px;"></th>
                 </tr>
             </thead>
 
@@ -31,7 +31,10 @@
                     <td>@item.Nombre</td>
                     <td>@item.Correo</td>
                     <td>@item.Telefono</td>
-                    <td></td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("Editar","Mantenedor", new { idcontacto = item.IdContacto})">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Mantenedor", new { idcontacto = item.IdContacto})">Eliminar</a>
+                    </td>
                 </tr>
             }
             </tbody>

@@ -42,7 +42,7 @@ namespace BDFIREBASE.Controllers
             {
                 listaContacto.Add(new Contacto()
                 {
-                    IdContacto = elemento.Value.IdContacto,
+                    IdContacto = elemento.Key,
                     Nombre = elemento.Value.Nombre,
                     Correo = elemento.Value.Correo,
                     Telefono = elemento.Value.Telefono
@@ -56,14 +56,24 @@ namespace BDFIREBASE.Controllers
             return View();
         }
 
-        public ActionResult Editar()
+        public ActionResult Editar(string idcontacto)
         {
-            return View();
+            FirebaseResponse response = cliente.Get("contactos");
+
+            Contacto ocontacto = response.ResultAs<Contacto>();
+
+
+            ocontacto.IdContacto = idcontacto;
+
+
+
+            return View(ocontacto);
         }
 
-        public ActionResult Eliminar()
+        public ActionResult Eliminar(string idcontacto)
         {
-            return View();
+            FirebaseResponse response = cliente.Delete("contactos/" + idcontacto);
+            return RedirectToAction("Inicio", "Mantenedor");
         }
 
         [HttpPost]
@@ -75,13 +85,30 @@ namespace BDFIREBASE.Controllers
 
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return View();
+                return RedirectToAction("Inicio", "Mantenedor");
             }
             else
             {
                 return View();
             }
 
+        }
+        [HttpPost]
+        public ActionResult Editar(Contacto oContacto)
+        {
+            string idcontacto = oContacto.IdContacto;
+            oContacto.IdContacto = null;
+
+            FirebaseResponse response = cliente.Update("contactos/"+idcontacto, oContacto);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return RedirectToAction("Inicio", "Mantenedor");
+            }
+            else
+            {
+                return View();
+            }            
         }
 
     }
